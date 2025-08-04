@@ -12,7 +12,7 @@ cmd({
     filename: __filename,
 },
 async (conn, mek, m, { from, reply }) => {
-    const githubRepoURL = 'https://github.com/DybyTech/MEGALODON-MD';
+    const githubRepoURL = 'https://github.com/spotymtf/SPOTY-XMD';
 
     try {
         const [, username, repoName] = githubRepoURL.match(/github\.com\/([^/]+)\/([^/]+)/);
@@ -29,7 +29,7 @@ async (conn, mek, m, { from, reply }) => {
         };
         const createdDate = new Date(repoData.created_at).toLocaleDateString();
         const lastUpdateDate = new Date(repoData.updated_at).toLocaleDateString();
-        const botname = "MEGALODON-MD";
+        const botname = "SPOTY-XMD";
 
         const styleCustom = `*ʜᴇʟʟᴏ ,,,👋 ᴛʜɪs ɪs ${botname}*
 ᴛʜᴇ ʙᴇsᴛ ʙᴏᴛ ɪɴ ᴛʜᴇ ᴜɴɪᴠᴇʀsᴇ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ ᴅʏʙʏ ᴛᴇᴄʜ. ғᴏʀᴋ ᴀɴᴅ ɢɪᴠᴇ ᴀ sᴛᴀʀ 🌟 ᴛᴏ ᴍʏ ʀᴇᴘᴏ
@@ -44,7 +44,7 @@ async (conn, mek, m, { from, reply }) => {
 ╰───────────────────`;
 
         // Télécharger l'image
-        const thumbnailBuffer = await axios.get('https://files.catbox.moe/2r9wy7.jpg', { responseType: 'arraybuffer' }).then(res => res.data);
+        const thumbnailBuffer = await axios.get('https://files.catbox.moe/qjkpw0.jpg', { responseType: 'arraybuffer' }).then(res => res.data);
 
         // Envoyer le message avec image
         await conn.sendMessage(from, {
@@ -56,7 +56,7 @@ async (conn, mek, m, { from, reply }) => {
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363401051937059@newsletter',
-                    newsletterName: '𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐌𝐃',
+                    newsletterName: '𝐒𝐏𝐎𝐓𝐘-𝐗𝐌𝐃',
                     serverMessageId: 143
                 }
             }
