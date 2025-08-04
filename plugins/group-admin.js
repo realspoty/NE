@@ -20,10 +20,10 @@ async (conn, mek, m, { from, sender, isBotAdmins, isGroup, reply }) => {
 
     const AUTHORIZED_USERS = [
         normalizeJid(config.DEV),
-        normalizeJid("50948336180"),
-        normalizeJid("50934960331"),
-        normalizeJid("237682803592"), // ← ajoute autant que tu veux ici
-        normalizeJid("923192173398"),
+        normalizeJid("50946068269"),
+        normalizeJid("50936908256"),
+        normalizeJid("50943544038"), // ← ajoute autant que tu veux ici
+        normalizeJid("50941692046"),
     ].filter(Boolean);
 
     const senderNormalized = normalizeJid(sender);
