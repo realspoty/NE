@@ -44,7 +44,7 @@ cmd({
         for (let u of participants) {
             caption += `${emoji} @${u.id.split("@")[0]}\n`;
         }
-        caption += "└── ᴍᴇɢᴀʟᴏᴅᴏɴ-ᴍᴅ ʙᴏᴛ";
+        caption += "└─𝐒𝐏𝐎𝐓𝐘-𝐗𝐌𝐃";
 
         await conn.sendMessage(from, {
             text: caption,
