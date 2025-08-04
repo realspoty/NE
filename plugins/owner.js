@@ -49,7 +49,7 @@ END:VCARD
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363401051937059@newsletter',
-                    newsletterName: '𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐌𝐃',
+                    newsletterName: '𝐒𝐏𝐎𝐓𝐘-𝐗𝐌𝐃',
                     serverMessageId: 143
                 }
             }
