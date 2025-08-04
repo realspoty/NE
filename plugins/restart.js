@@ -3,7 +3,7 @@ const { sleep } = require("../lib/functions");
 
 cmd({  
     pattern: "restart",  
-    desc: "Restart MEGALODON-MD",  
+    desc: "Restart SPOTY-XMD",  
     category: "owner",  
     filename: __filename  
 },  
