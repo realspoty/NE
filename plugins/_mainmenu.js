@@ -4,6 +4,7 @@ const { runtime } = require('../lib/functions');
 const config = require('../config');
 
 const readMore = String.fromCharCode(8206).repeat(4001);
+const imageUrl = config.MENU_IMAGE_URL  ||  'https://files.catbox.moe/qjkpw0.jpg';
 
 cmd({
     pattern: "menu",
@@ -47,10 +48,25 @@ ${readMore}
             menuText += '╰─────────────╶╶···◈*\n';
         }
 
-        await conn.sendMessage(from, {
-            image: { url: 'https://files.catbox.moe/qjkpw0.jpg' },
-            caption: menuText.trim()
-        }, { quoted: mek });
+        await conn.sendMessage(
+            from,
+            {
+                image: { url: imageUrl },
+                caption: menuText.trim(),
+                ai: true,
+                contextInfo: {
+                    mentionedJid: [m.sender],
+                    forwardingScore: 999,
+                    isForwarded: true,
+                    forwardedNewsletterMessageInfo: {
+                        newsletterJid: '120363304325601080@newsletter',
+                        newsletterName: '『 SPOTY-XMD 』 ',
+                        serverMessageId: 143
+                    }
+                }
+            },
+            { quoted: mek }
+        );
 
         await conn.sendMessage(from, {
             react: { text: "✅", key: m.key }
