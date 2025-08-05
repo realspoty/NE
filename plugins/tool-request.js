@@ -29,8 +29,8 @@ cmd({
         }
         global.reportedMessages[messageId] = true;
 
-        const reportText = `*| 𝐑𝐄𝐐𝐔𝐄𝐒𝐓 / 𝐌𝐄𝐆𝐀𝐋𝐎𝐃𝐎𝐍-𝐌𝐈𝐍𝐈 |*\n\n*User*: @${sender.split("@")[0]}\n*ᴛɪᴍᴇ:* ${time}\n*ᴍᴇssᴀɢᴇ:* ${args.join(" ")}`;
-        const confirmation = `✅ 𝐓𝐡𝐚𝐧𝐤𝐬 ${msg.pushName || "user"}, ʏᴏᴜʀ ʀᴇᴘᴏʀᴛ ʜᴀs ʙᴇᴇɴ sᴇɴᴛ ᴛᴏ ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴇʀs.`;
+        const reportText = `*| 𝐑𝐄𝐐𝐔𝐄𝐒𝐓 / 𝐒𝐏𝐎𝐓𝐘-𝐌𝐈𝐍𝐈 |*\n\n*User*: @${sender.split("@")[0]}\n*ᴛɪᴍᴇ:* ${time}\n*ᴍᴇssᴀɢᴇ:* ${args.join(" ")}`;
+        const confirmation = `✅ 𝐓𝐡𝐚𝐧𝐤𝐬 ${msg.pushName || "user"}, ʏᴏᴜʀ ʀᴇᴘᴏʀᴛ ʜᴀs ʙᴇᴇɴ sᴇɴᴛ ᴛᴏ �ᴛʜᴇ ᴅᴇᴠᴇʟᴏᴘᴇʀs.`;
 
         // Sauvegarde dans le fichier
         const reports = fs.existsSync(reportFile) ? JSON.parse(fs.readFileSync(reportFile)) : [];
