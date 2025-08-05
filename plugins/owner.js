@@ -48,7 +48,7 @@ END:VCARD
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363401051937059@newsletter',
+                    newsletterJid: '120363420482137109@newsletter',
                     newsletterName: '𝐒𝐏𝐎𝐓𝐘-𝐗𝐌𝐃',
                     serverMessageId: 143
                 }
