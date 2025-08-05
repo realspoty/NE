@@ -32,7 +32,7 @@ async (conn, mek, m, { from, reply }) => {
         const botname = "SPOTY-XMD";
 
         const styleCustom = `*ʜᴇʟʟᴏ ,,,👋 ᴛʜɪs ɪs ${botname}*
-ᴛʜᴇ ʙᴇsᴛ ʙᴏᴛ ɪɴ ᴛʜᴇ ᴜɴɪᴠᴇʀsᴇ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ ᴅʏʙʏ ᴛᴇᴄʜ. ғᴏʀᴋ ᴀɴᴅ ɢɪᴠᴇ ᴀ sᴛᴀʀ 🌟 ᴛᴏ ᴍʏ ʀᴇᴘᴏ
+ᴛʜᴇ ʙᴇsᴛ ʙᴏᴛ ɪɴ ᴛʜᴇ ᴜɴɪᴠᴇʀsᴇ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ sᴘᴏᴛʏ ᴍᴛғ. ғᴏʀᴋ ᴀɴᴅ ɢɪᴠᴇ ᴀ sᴛᴀʀ 🌟 ᴛᴏ ᴍʏ ʀᴇᴘᴏ`;
 ╭───────────────────
 │✞ *sᴛᴀʀs:* ${repoInfo.stars}
 │✞ *ғᴏʀᴋs:* ${repoInfo.forks}
