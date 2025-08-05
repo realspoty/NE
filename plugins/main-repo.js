@@ -22,34 +22,41 @@ async (conn, mek, m, { from, reply }) => {
         const repoData = await response.json();
 
         const author = repoData.owner.login;
-        const repoInfo = {
-            stars: repoData.stargazers_count,
-            forks: repoData.forks_count,
-            url: repoData.html_url
-        };
+        const stars = repoData.stargazers_count;
+        const forks = repoData.forks_count;
         const createdDate = new Date(repoData.created_at).toLocaleDateString();
-        const lastUpdateDate = new Date(repoData.updated_at).toLocaleDateString();
-        const botname = "SPOTY-XMD";
+        const lastUpdate = new Date(repoData.updated_at).toLocaleDateString();
+        const repoLink = repoData.html_url;
 
-        const styleCustom = `*ʜᴇʟʟᴏ ,,,👋 ᴛʜɪs ɪs ${botname}*
-ᴛʜᴇ ʙᴇsᴛ ʙᴏᴛ ɪɴ ᴛʜᴇ ᴜɴɪᴠᴇʀsᴇ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ sᴘᴏᴛʏ ᴍᴛғ. ғᴏʀᴋ ᴀɴᴅ ɢɪᴠᴇ ᴀ sᴛᴀʀ 🌟 ᴛᴏ ᴍʏ ʀᴇᴘᴏ`;
-╭───────────────────
-│✞ *sᴛᴀʀs:* ${repoInfo.stars}
-│✞ *ғᴏʀᴋs:* ${repoInfo.forks}
-│✞ *ʀᴇʟᴇᴀsᴇ Date:* ${createdDate}
-│✞ *ʟᴀsᴛ Update:* ${lastUpdateDate}
-│✞ *ᴏᴡɴᴇʀ:* ${author}
-│✞ *ʀᴇᴘᴏsɪᴛᴏʀʏ:* ${repoInfo.url}
-│✞ *sᴇssɪᴏɴ:* meg-lodon-session.up.railway.app 
-╰───────────────────`;
+        const botname = "ＳＰＯＴＹ－ＸＭＤ";
 
-        // Télécharger l'image
-        const thumbnailBuffer = await axios.get('https://files.catbox.moe/qjkpw0.jpg', { responseType: 'arraybuffer' }).then(res => res.data);
+        const caption = `
+┏━━━━━━━━━━━━━━━━━━━⬣
+┃   *${botname}*
+┃━━━━━━━━━━━━━━━━━━━
+┃ 👤 *ᴏᴡɴᴇʀ:* ${author}
+┃ 📦 *ʀᴇᴘᴏ:* ${repoLink}
+┃ 🌟 *sᴛᴀʀs:* ${stars}
+┃ 🍴 *ғᴏʀᴋs:* ${forks}
+┃ 🗓️ *ᴄʀᴇᴀᴛᴇᴅ:* ${createdDate}
+┃ 🔄 *ᴜᴘᴅᴀᴛᴇᴅ:* ${lastUpdate}
+┃ 🌐 *sᴇssɪᴏɴ:* spoty-xmd-session.onrender.com 
+┗━━━━━━━━━━━━━━━━━━━⬣
 
-        // Envoyer le message avec image
+💬 *ʜᴇʏ*, ᴛʜɪs ɪs *${botname}*,  
+the ᴍᴏsᴛ ᴀᴅᴠᴀɴᴄᴇᴅ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ  
+ᴄᴏᴅᴇᴅ ʙʏ *sᴘᴏᴛʏ ᴍᴛғ* 👑
+
+✨ ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ & ɢɪᴠᴇ ᴀ ⭐ ᴏɴ ɢɪᴛʜᴜʙ!
+`;
+
+        const thumbnail = await axios.get('https://files.catbox.moe/qjkpw0.jpg', {
+            responseType: 'arraybuffer'
+        }).then(res => res.data);
+
         await conn.sendMessage(from, {
-            image: thumbnailBuffer,
-            caption: styleCustom,
+            image: thumbnail,
+            caption: caption.trim(),
             contextInfo: {
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
@@ -62,8 +69,8 @@ async (conn, mek, m, { from, reply }) => {
             }
         }, { quoted: mek });
 
-    } catch (error) {
-        console.error("Erreur commande repo:", error);
-        reply(`❌ Erreur : ${error.message}`);
+    } catch (err) {
+        console.error("❌ Erreur:", err);
+        reply("❌ Une erreur est survenue : " + err.message);
     }
 });
