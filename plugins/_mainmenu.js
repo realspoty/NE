@@ -4,7 +4,7 @@ const { runtime } = require('../lib/functions');
 const config = require('../config');
 
 const readMore = String.fromCharCode(8206).repeat(4001);
-const imageUrl = config.MENU_IMAGE_URL  ||  'https://files.catbox.moe/qjkpw0.jpg';
+const imageUrl = config.MENU_IMAGE_URL || 'https://files.catbox.moe/qjkpw0.jpg';
 
 cmd({
     pattern: "menu",
@@ -18,6 +18,9 @@ async (conn, mek, m, { from, pushname, reply }) => {
     try {
         const version = "1.0.1";
         const totalCommands = commands.length;
+        const ramUsed = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+        const ramTotal = Math.round(os.totalmem() / 1024 / 1024);
+        const uptime = runtime(process.uptime());
 
         let menuText = `
 \`\`\`ＳＰＯＴＹ－ＸＭＤ\`\`\`
@@ -26,9 +29,9 @@ async (conn, mek, m, { from, pushname, reply }) => {
 ▧ *ᴄʀᴇᴀᴛᴏʀ* : *sᴘᴏᴛʏ ᴍᴛғ*
 ▧ *ᴍᴏᴅᴇ* : *${config.MODE}* 
 ▧ *ᴘʀᴇғɪx* : *${config.PREFIX}*
-▧ *ʀᴀᴍ* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(os.totalmem() / 1024 / 1024)}MB 
+▧ *ʀᴀᴍ* : ${ramUsed}MB / ${ramTotal}MB 
 ▧ *ᴠᴇʀsɪᴏɴ* : *${version}* 
-▧ *ᴜᴘᴛɪᴍᴇ* : ${runtime(process.uptime())}
+▧ *ᴜᴘᴛɪᴍᴇ* : ${uptime}
 ▧ *ᴄᴏᴍᴍᴀɴᴅs* : ${totalCommands}
 ⟣──────────────────⟢
 ${readMore}
@@ -37,10 +40,11 @@ ${readMore}
         const categories = [...new Set(commands.map(cmd => cmd.category))];
 
         for (const category of categories) {
-            const cmdsInCat = commands.filter(cmd => cmd.category === category);
+            // Filtrer les commandes valides (qui ont un pattern défini)
+            const cmdsInCat = commands.filter(cmd => cmd.category === category && cmd.pattern);
             if (cmdsInCat.length === 0) continue;
 
-            menuText += `\n*🎴 \`${category.toUpperCase()} MENU\` 🎴*\n\n`;
+            menuText += `\n*🎴 ${category.toUpperCase()} MENU 🎴*\n\n`;
             menuText += '╭─────────────···◈\n';
             cmdsInCat.forEach(cmd => {
                 menuText += `*┋* *⬡ ${config.PREFIX}${cmd.pattern}*\n`;
