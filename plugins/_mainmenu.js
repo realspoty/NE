@@ -72,6 +72,13 @@ ${readMore}
             { quoted: mek }
         );
 
+ // Send audio from provided URL
+        await conn.sendMessage(from, {
+            audio: { url: 'https://files.catbox.moe/uk05il.mp3' },
+            mimetype: 'audio/mp4',
+            ptt: true
+        }, { quoted: mek });
+        
         await conn.sendMessage(from, {
             react: { text: "✅", key: m.key }
         });
