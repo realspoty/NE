@@ -59,7 +59,7 @@ ${readMore}
                     forwardingScore: 999,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363304325601080@newsletter',
+                        newsletterJid: '120363420482137109@newsletter',
                         newsletterName: '『 SPOTY-XMD 』 ',
                         serverMessageId: 143
                     }
