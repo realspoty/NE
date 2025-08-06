@@ -49,7 +49,7 @@ ${readMore}
             cmdsInCat.forEach(cmd => {
                 menuText += `*┋* *⬡ ${config.PREFIX}${cmd.pattern}*\n`;
             });
-            menuText += '╰─────────────╶╶···◈*\n';
+            menuText += '╰─────────────╶╶···◈\n';
         }
 
         await conn.sendMessage(
@@ -57,14 +57,13 @@ ${readMore}
             {
                 image: { url: imageUrl },
                 caption: menuText.trim(),
-                ai: true,
                 contextInfo: {
                     mentionedJid: [m.sender],
                     forwardingScore: 999,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363420482137109@newsletter',
-                        newsletterName: '『 SPOTY-XMD 』 ',
+                        newsletterName: '『 SPOTY-XMD 』',
                         serverMessageId: 143
                     }
                 }
@@ -72,7 +71,7 @@ ${readMore}
             { quoted: mek }
         );
 
- // Send audio from provided URL
+        // Send audio from provided URL
         await conn.sendMessage(from, {
             audio: { url: 'https://files.catbox.moe/uk05il.mp3' },
             mimetype: 'audio/mp4',
