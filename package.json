@@ -1,15 +1,15 @@
 {
-"name": "SPOTY-MTF", 
+"name": "MEGALODON-MD",
   "version": "1.0.0",
-  "description": "A simple baileys bot by SPOTY MTF",
+  "description": "A WhatsApp Bot Created By DybyTech",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name SPOTY-MTF",
-    "stop": "pm2 stop SPOTY-MTF",
-    "restart": "pm2 restart SPOTY-MTF"
+    "start": "pm2 start index.js --deep-monitoring --attach --name MEGALODON-MD",
+    "stop": "pm2 stop MEGALODON-MD",
+    "restart": "pm2 restart MEGALODON-MD"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.1",
+    "@whiskeysockets/baileys": "github:EdderBot02/bail",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@dark-yasiya/yt-dl.js": "1.0.5",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
