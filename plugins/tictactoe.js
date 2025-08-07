@@ -1,4 +1,4 @@
-const TicTacToe = require('../commanď');
+const TicTacToe = require('../command');
 
 // Store games globally
 const games = {};
