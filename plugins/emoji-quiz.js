@@ -117,7 +117,7 @@ const emojiRiddles = [
 cmd({
   pattern: "emoji",
   alias: ["emojigame", "guess"],
-  desc: "Start an Emoji Quiz game",
+  desc: "Start An Emoji Quiz game",
   category: "game",
   filename: __filename,
 }, async (conn, mek, m, { from, sender, reply }) => {
@@ -125,7 +125,7 @@ cmd({
 
   const riddle = emojiRiddles[Math.floor(Math.random() * emojiRiddles.length)];
   const game = {
-    answer: riddle.answer.toLowerCase(),
+    answer: riddle.answer,
     emojis: riddle.emojis,
     active: true,
     timeout: null,
@@ -148,7 +148,7 @@ cmd({
   }, 3 * 60 * 1000);
 
   await conn.sendMessage(from, {
-    text: `🎮 *ᴇᴍᴏᴊɪ Qᴜɪᴢ ꜱᴛᴀʀᴛᴇᴅ!*\n\nɢᴜᴇꜱꜱ ᴡʜᴀᴛ ᴛʜɪꜱ ʀᴇᴘʀᴇꜱᴇɴᴛꜱ:\n\n${game.emojis}\n\nʀᴇᴘʟʏ ᴡɪᴛʜ ʏᴏᴜʀ ᴀɴꜱᴡᴇʀ (ᴇ.ɢ., "ʜᴀʀʀʏ ᴘᴏᴛᴛᴇʀ")\n\n*ᴄᴏᴍᴍᴀɴᴅꜱ:*\n- .ʜɪɴᴛ (ɢᴇᴛ ᴀ ʜɪɴᴛ)\n- .ꜱᴛᴏᴘ (ᴇɴᴅ ɢᴀᴍᴇ)`,
+    text: `🎮 *ᴇᴍᴏᴊɪ Qᴜɪᴢ ꜱᴛᴀʀᴛᴇᴅ!*\n\nɢᴜᴇꜱꜱ ᴡʜᴀᴛ ᴛʜɪꜱ ʀᴇᴘʀᴇꜱᴇɴᴛꜱ:\n\n${game.emojis}\n\nʀᴇᴘʟʏ ᴡɪᴛʜ ʏᴏᴜʀ ᴀɴꜱᴡᴇʀ\n\n*ᴄᴏᴍᴍᴀɴᴅꜱ:*\n- .ʜɪɴᴛ (ɢᴇᴛ ᴀ ʜɪɴᴛ)\n- .ꜱᴛᴏᴘ (ᴇɴᴅ ɢᴀᴍᴇ)`,
   }, { quoted: m });
 
   activeGames[from] = game;
@@ -156,17 +156,22 @@ cmd({
     const msg = messages[0];
     if (!msg.message || !activeGames[from]) return;
 
-    const text = (msg.message.conversation || "").trim().toLowerCase();
+    const normalize = (str) => str.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+    const text = normalize(msg.message.conversation || "");
     const senderJid = msg.key.participant || msg.key.remoteJid;
 
-    if (text === ".stop" && senderJid === sender) {
+    // Debug logs
+    console.log('Received:', text);
+    console.log('Expected:', game.answer);
+
+    if (text === "stop" && senderJid === sender) {
       cleanup();
       return conn.sendMessage(from, { 
         text: `🛑 *ɢᴀᴍᴇ ꜱᴛᴏᴘᴘᴇᴅ!* ᴛʜᴇ ᴀɴꜱᴡᴇʀ ᴡᴀꜱ *${game.answer}*.` 
       });
     }
 
-    if (text === ".hint") {
+    if (text === "hint") {
       if (game.hintsGiven >= game.maxHints) {
         return conn.sendMessage(from, { 
           text: `❌ ɴᴏ ᴍᴏʀᴇ ʜɪɴᴛꜱ ʟᴇꜰᴛ! ᴛʀʏ ɢᴜᴇꜱꜱɪɴɢ.` 
@@ -175,11 +180,11 @@ cmd({
       game.hintsGiven++;
       const hint = game.answer.substring(0, game.hintsGiven * 3);
       return conn.sendMessage(from, { 
-        text: `💡 *ʜɪɴᴛ:* \`${hint}...\`` 
+        text: `💡 *HINT:* \`${hint}...\`` 
       });
     }
 
-    if (text === game.answer) {
+    if (text === normalize(game.answer)) {
       cleanup();
       return conn.sendMessage(from, {
         text: `🎉 *ᴄᴏʀʀᴇᴄᴛ!* @${senderJid.split("@")[0]} ɢᴜᴇꜱꜱᴇᴅ ɪᴛ!\n\nᴀɴꜱᴡᴇʀ: *${game.answer}*\n${game.emojis}`,
