@@ -117,7 +117,7 @@ const emojiRiddles = [
 cmd({
   pattern: "emoji",
   alias: ["emojigame", "guess"],
-  desc: "Start an Emoji Quiz Game",
+  desc: "Start an Emoji Quiz game",
   category: "game",
   filename: __filename,
 }, async (conn, mek, m, { from, sender, reply }) => {
