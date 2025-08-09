@@ -117,7 +117,7 @@ const emojiRiddles = [
 cmd({
   pattern: "emoji",
   alias: ["emojigame", "guess"],
-  desc: "Start An Emoji Quiz game",
+  desc: "ꜱᴛᴀʀᴛ ᴀɴ ᴇᴍᴏᴊɪ Qᴜɪᴢ ɢᴀᴍᴇ",
   category: "game",
   filename: __filename,
 }, async (conn, mek, m, { from, sender, reply }) => {
@@ -143,7 +143,7 @@ cmd({
       cleanup();
       conn.sendMessage(from, { 
         text: `⏰ *ᴛɪᴍᴇ'ꜱ ᴜᴘ!* ᴛʜᴇ ᴀɴꜱᴡᴇʀ ᴡᴀꜱ *${game.answer}*.\n\n${game.emojis}` 
-      }, { quoted: m });
+      });
     }
   }, 3 * 60 * 1000);
 
@@ -152,55 +152,44 @@ cmd({
   }, { quoted: m });
 
   activeGames[from] = game;
+  conn.ev.on("messages.upsert", async ({ messages }) => {
+    const msg = messages[0];
+    if (!msg.message || !activeGames[from]) return;
 
-  // Create a message handler specifically for this game
-  const messageHandler = async (msg) => {
-    if (!msg.message || !msg.key.fromMe && !msg.key.participant) return;
-    
-    const chatJid = msg.key.remoteJid;
-    if (chatJid !== from) return;
-    
-    const userJid = msg.key.participant || msg.key.remoteJid;
-    const isAdmin = userJid === sender;
-    const text = (msg.message.conversation || "").trim().toLowerCase();
-    
-    if (!activeGames[from]) return;
-    
     const normalize = (str) => str.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
-    const normalizedText = normalize(text);
-    const normalizedAnswer = normalize(game.answer);
+    const text = normalize(msg.message.conversation || "");
+    const senderJid = msg.key.participant || msg.key.remoteJid;
 
-    if (text === 'stop' && isAdmin) {
+    // Debug logs
+    console.log('Received:', text);
+    console.log('Expected:', game.answer);
+
+    if (text === "stop" && senderJid === sender) {
       cleanup();
-      conn.ev.off('messages.upsert', messageHandler);
       return conn.sendMessage(from, { 
         text: `🛑 *ɢᴀᴍᴇ ꜱᴛᴏᴘᴘᴇᴅ!* ᴛʜᴇ ᴀɴꜱᴡᴇʀ ᴡᴀꜱ *${game.answer}*.` 
-      }, { quoted: m });
+      });
     }
 
-    if (text === 'hint') {
+    if (text === "hint") {
       if (game.hintsGiven >= game.maxHints) {
         return conn.sendMessage(from, { 
           text: `❌ ɴᴏ ᴍᴏʀᴇ ʜɪɴᴛꜱ ʟᴇꜰᴛ! ᴛʀʏ ɢᴜᴇꜱꜱɪɴɢ.` 
-        }, { quoted: m });
+        });
       }
       game.hintsGiven++;
       const hint = game.answer.substring(0, game.hintsGiven * 3);
       return conn.sendMessage(from, { 
         text: `💡 *HINT:* \`${hint}...\`` 
-      }, { quoted: m });
+      });
     }
 
-    if (normalizedText === normalizedAnswer) {
+    if (text === normalize(game.answer)) {
       cleanup();
-      conn.ev.off('messages.upsert', messageHandler);
       return conn.sendMessage(from, {
-        text: `🎉 *ᴄᴏʀʀᴇᴄᴛ!* @${userJid.split("@")[0]} ɢᴜᴇꜱꜱᴇᴅ ɪᴛ!\n\nᴀɴꜱᴡᴇʀ: *${game.answer}*\n${game.emojis}`,
-        mentions: [userJid]
-      }, { quoted: m });
+        text: `🎉 *ᴄᴏʀʀᴇᴄᴛ!* @${senderJid.split("@")[0]} ɢᴜᴇꜱꜱᴇᴅ ɪᴛ!\n\nᴀɴꜱᴡᴇʀ: *${game.answer}*\n${game.emojis}`,
+        mentions: [senderJid]
+      });
     }
-  };
-
-  // Add the message handler
-  conn.ev.on('messages.upsert', messageHandler);
+  });
 });
