@@ -84,7 +84,7 @@ cmd({
                       `${scoreLine}\n\n`;
         });
 
-        message += `\nData provided by Football-Data.org`;
+        message += `\nᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴘᴏᴛʏ ᴍᴛғ`;
         await reply(message);
 
     } catch (error) {
