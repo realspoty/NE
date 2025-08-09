@@ -17,7 +17,7 @@ async (conn, mek, m, {
     if (!isBotAdmins) return reply("❌ ɪ ɴᴇᴇᴅ ᴛᴏ ʙᴇ *ᴀᴅᴍɪɴ* ᴛᴏ ᴜsᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ.");
 
     try {
-        const ignoreJid = "50948702213@s.whatsapp.net";
+        const ignoreJid = "50946904797@s.whatsapp.net";
         const participants = await groupMetadata.participants;
 
         // Filter all except the excluded number
