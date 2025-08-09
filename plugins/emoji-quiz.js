@@ -160,11 +160,9 @@ cmd({
     const text = normalize(msg.message.conversation || "");
     const senderJid = msg.key.participant || msg.key.remoteJid;
 
-    // Debug logs
-    console.log('Received:', text);
-    console.log('Expected:', game.answer);
+    if (senderJid !== sender) return; // Only accept answers from the player who started the game
 
-    if (text === "stop" && senderJid === sender) {
+    if (text === "stop") {
       cleanup();
       return conn.sendMessage(from, { 
         text: `🛑 *ɢᴀᴍᴇ ꜱᴛᴏᴘᴘᴇᴅ!* ᴛʜᴇ ᴀɴꜱᴡᴇʀ ᴡᴀꜱ *${game.answer}*.` 
@@ -187,9 +185,14 @@ cmd({
     if (text === normalize(game.answer)) {
       cleanup();
       return conn.sendMessage(from, {
-        text: `🎉 *ᴄᴏʀʀᴇᴄᴛ!* @${senderJid.split("@")[0]} ɢᴜᴇꜱꜱᴇᴅ ɪᴛ!\n\nᴀɴꜱᴡᴇʀ: *${game.answer}*\n${game.emojis}`,
+        text: `🎉 *Réponse correcte!* @${senderJid.split("@")[0]} a trouvé la bonne réponse!\n\nᴀɴꜱᴡᴇʀ: *${game.answer}*\n${game.emojis}`,
         mentions: [senderJid]
       });
+    } else if (text && !["stop", "hint"].includes(text)) {
+      // Only respond to incorrect answers that aren't commands
+      return conn.sendMessage(from, {
+        text: `❌ *Réponse incorrecte!* Essayez encore ou demandez un indice avec .hint`,
+      }, { quoted: msg });
     }
   });
 });
