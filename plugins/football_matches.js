@@ -8,11 +8,11 @@ const API_BASE_URL = 'https://api.football-data.org/v4/';
 // Competitions Mapping
 const competitions = {
     'CL': 'CL',   // Champions League
-    'ʙʟ': 'ʙʟ1', // Bundesliga
-    'ʟ1': 'ꜰʟ1', // Ligue 1
-    'ʟʟ': 'ᴘᴅ',   // La Liga
-    'ꜱᴀ': 'ꜱᴀ',   // Serie A
-    'ᴘʟ': 'ᴘʟ'    // Premier League
+    'BL': 'BL1', // Bundesliga
+    'L1': 'FL1', // Ligue 1
+    'PD': 'PD',   // La Liga
+    'SA': 'SA',   // Serie A
+    'PL': 'PL'    // Premier League
 };
 
 cmd({
@@ -28,13 +28,13 @@ cmd({
         // Check requested league
         if (!input || !competitions[input]) {
             return reply(`⚠️ ᴘʟᴇᴀsᴇ sᴘᴇᴄɪғʏ ᴀ ᴠᴀʟɪᴅ ᴄᴏᴍᴘᴇᴛɪᴛɪᴏɴ:\n\n` +
-                `• *CL* - Champions League\n` +
-                `• *BL1* - Bundesliga\n` +
-                `• *FL1* - Ligue 1\n` +
-                `• *PD* - La Liga\n` +
-                `• *SA* - Serie A\n` +
-                `• *PL* - Premier League\n\n` +
-                `Example: .matches PL`);
+                `• *ᴄʟ* - ᴄʜᴀᴍᴘɪᴏɴs ʟᴇᴀɢᴜᴇ\n` +
+                `• *ʙʟ1* - ʙᴜɴᴅᴇsʟɪɢᴀ\n` +
+                `• *ғʟ1* - ʟɪɢᴜᴇᴇ 1\n` +
+                `• *ᴘᴅ* - ʟᴀ ʟɪɢᴀ\n` +
+                `• *sᴀ* - sᴇʀɪᴇ ᴀ\n` +
+                `• *ᴘʟ* - ᴘʀᴇᴍɪᴇʀ ʟᴇᴀɢᴜᴇ\n\n` +
+                `ᴇxᴇᴍᴘʟᴇ: .matches PL`);
         }
 
         const competitionCode = competitions[input];
