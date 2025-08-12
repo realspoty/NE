@@ -16,10 +16,10 @@ const competitions = {
 };
 
 cmd({
-    pattern: "prediction",
-    alias: ["predict", "footpred"],
+    pattern: "matches",
+    alias: ["match", "footpred"],
     desc: "[ᴜᴘᴄᴏᴍɪɴɢ ғᴏᴏᴛʙᴀʟʟ ᴘʀᴇᴅɪᴄᴛɪᴏɴs]",
-    category: "SPORT MENU",
+    category: "sport",
     filename: __filename,
 }, async (conn, mek, m, { from, sender, reply, isGroup, args }) => {
     try {
@@ -89,7 +89,7 @@ cmd({
                       `💡 ᴛɪᴘ: ${prediction.advice}\n\n`;
         }
 
-        message += `\n📈 ᴘᴏᴡᴇʀᴇᴅ ʙʏ ғᴏᴏᴛʙᴀʟʟ-ᴅᴀᴛᴀ.ᴏʀɢ`;
+        message += `\n📈 ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴘᴏᴛʏ ᴍᴛғ`;
         await reply(message);
 
     } catch (error) {
