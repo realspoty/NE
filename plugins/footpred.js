@@ -16,7 +16,7 @@ const competitions = {
 };
 
 cmd({
-    pattern: "footpred",
+    pattern: "prediction",
     alias: ["match", "footpred"],
     desc: "[ᴜᴘᴄᴏᴍɪɴɢ ғᴏᴏᴛʙᴀʟʟ ᴘʀᴇᴅɪᴄᴛɪᴏɴs]",
     category: "sport",
